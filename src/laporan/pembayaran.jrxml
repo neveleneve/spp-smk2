@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pembayaran" language="groovy" pageWidth="950" pageHeight="842" columnWidth="910" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="JudulLaporan" class="java.lang.String"/>
+	<parameter name="paraBulan" class="java.lang.String"/>
+	<parameter name="paraTahun" class="java.lang.String"/>
+	<parameter name="txtBulan" class="java.lang.String"/>
+	<parameter name="txtTahun" class="java.lang.String"/>
+	<parameter name="paraKelas" class="java.lang.String"/>
+	<parameter name="txtKelas" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select * from bayar]]>
+	</queryString>
+	<field name="Nopembayaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tglbayar" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NIS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jenisKelamin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="KodeKelas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Kelas" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="BulanPembayaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JumlahBayar" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalBayar" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TahunAjaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="215" y="0" width="662" height="55" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="20"/>
+				</textElement>
+				<text><![CDATA[SEKOLAH MENENGAH KEJURUAN NEGERI 2
+TANJUNGPINANG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="55" width="662" height="55" />
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Serif" size="15"/>
+				</textElement>
+				<text><![CDATA[Jl. Pramuka No.1, Kecamatan Bukit Bestari, Tanjungpinang
+Telp / Fax : 0771 – 22653]]></text>
+			</staticText>
+			<image>
+				<reportElement x="64" y="6" width="103" height="105" />
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="135" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="13" width="910" height="58" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{JudulLaporan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="103" width="86" height="20" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtTahun}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="103" width="86" height="20" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtBulan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="103" width="100" height="20" />
+				<textFieldExpression><![CDATA[$P{paraBulan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="103" width="100" height="20" />
+				<textFieldExpression><![CDATA[$P{paraTahun}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="393" y="103" width="86" height="20" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtKelas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="478" y="103" width="100" height="20" />
+				<textFieldExpression><![CDATA[$P{paraKelas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="25" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nomor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="124" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="223" y="0" width="55" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="0" width="212" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="488" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kelas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="587" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Bulan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="686" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tahun Ajaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="785" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#6666FF" />
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="124" y="0" width="100" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMM yyyy", new Locale("in", "ID")).format($F{tglbayar})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="55" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="212" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="0" width="100" height="20" />
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Nopembayaran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="488" y="0" width="100" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Kelas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="587" y="0" width="100" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BulanPembayaran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="686" y="0" width="100" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TahunAjaran}.replace("-"," - ")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="785" y="0" width="100" height="20" />
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Rp. "+DecimalFormat.getInstance().format($F{JumlahBayar}).replace(",",".")+",00"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
