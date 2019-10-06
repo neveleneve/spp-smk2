@@ -303,7 +303,11 @@ public class laporan extends javax.swing.JFrame {
                 try{                                
                     File file = new File("src/laporan/siswa.jrxml");
                     JasperDesign jdesign = JRXmlLoader.load(file);
-                    String sql = "select nis, nama, jeniskelamin, tgllahir, tempatlahir, alamat, Telpon, Agama, Kelas, kodekelas from siswa where kodekelas = '" + cbkodekelasbayar.getSelectedItem().toString() + "' and nis not in (select nis from bayar where bulanpembayaran = '" + bln + "' and tahunajaran = '" + taun + "')";
+                    String sql = "select nis, nama, jeniskelamin, tgllahir, tempatlahir, alamat, Telpon, Agama, "
+                            + "Kelas, kodekelas from siswa where "
+                            + "kodekelas = '" + cbkodekelasbayar.getSelectedItem().toString() + "' and "
+                            + "nis not in (select nis from bayar where bulanpembayaran = '" + bln + "' and "
+                            + "tahunajaran = '" + taun + "')";
                     JRDesignQuery jrq = new JRDesignQuery();
                     jrq.setText(sql);
                     jdesign.setQuery(jrq);

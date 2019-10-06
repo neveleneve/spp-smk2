@@ -151,7 +151,7 @@ public class login extends javax.swing.JFrame {
         try{
             if(!txtusername.getText().equals("") && !txtpassword.getPassword().equals("")){            
                 Connection conn =  new DBConnection().connect();
-                String sql = "select * from login where username = '" + txtusername.getText() + "'AND password = '" + txtpassword.getText() + "'";
+                String sql = "select * from login where username = '" + txtusername.getText() + "' AND password = '" + txtpassword.getText() + "'";
                 Statement stm = conn.createStatement();
                 ResultSet res = stm.executeQuery(sql);             
                 if(res.next()){
