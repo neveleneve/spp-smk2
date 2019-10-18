@@ -5,8 +5,6 @@
  */
 package form;
 
-import form.function_laporan;
-
 /**
  *
  * @author NEVE
@@ -20,8 +18,8 @@ public class form_laporan extends javax.swing.JFrame {
         initComponents();
         cbKodeKelas.setEnabled(false);
         txtnis.setEnabled(false);
-        function_laporan.TahunAjaran(cbTahunAjaran);
-        function_laporan.kodekelas(cbKodeKelas);
+        FunctionClass.TahunAjaran(cbTahunAjaran);
+        FunctionClass.kodekelas(cbKodeKelas);        
     }
 
     /**
@@ -177,28 +175,19 @@ public class form_laporan extends javax.swing.JFrame {
         String bulan = cbBulan.getSelectedItem().toString();
         switch (cbJenisLaporan.getSelectedIndex()) {
             case 0:
-                function_laporan.laporanPembayaranBulanan(cbBulan, cbTahunAjaran, thaj, bulan);
+                FunctionClass.laporanPembayaranBulanan(cbBulan, cbTahunAjaran, thaj, bulan);
                 break;
             case 1:
-                function_laporan.laporanTunggakanBulanan(cbBulan, cbTahunAjaran, thaj, bulan);
+                FunctionClass.laporanTunggakanBulanan(cbBulan, cbTahunAjaran, thaj, bulan);
                 break;
             case 2:
-                cbBulan.setEnabled(true);
-                cbTahunAjaran.setEnabled(true);
-                cbKodeKelas.setEnabled(true);
-                txtnis.setEnabled(false);
+                FunctionClass.LaporanPembayaranBulananPerKelas(cbBulan, cbTahunAjaran, cbKodeKelas, thaj.replace(" - ", "-"), bulan);
                 break;
             case 3:
-                cbBulan.setEnabled(true);
-                cbTahunAjaran.setEnabled(true);
-                cbKodeKelas.setEnabled(true);
-                txtnis.setEnabled(false);
+                FunctionClass.laporanTunggakanBulananPerKelas(cbBulan, cbTahunAjaran, cbKodeKelas, thaj, bulan);
                 break;
             case 4:
-                cbBulan.setEnabled(false);
-                cbTahunAjaran.setEnabled(true);
-                cbKodeKelas.setEnabled(false);
-                txtnis.setEnabled(true);
+                FunctionClass.StrukSiswa(txtnis);
                 break;
         }
         

@@ -12,8 +12,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date; 
-import java.util.Random;
+import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,10 +31,11 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class pembayaran extends javax.swing.JFrame{   
-    int totalbayar=0;
-    Random rand=new Random();
-    int no=rand.nextInt(10000);
+public class pembayaran extends javax.swing.JFrame {
+
+    int totalbayar = 0;
+    String nopm, bln, ta;
+
     public pembayaran() {
         initComponents();
         lbltotal.setText(String.valueOf(totalbayar));
@@ -43,96 +43,10 @@ public class pembayaran extends javax.swing.JFrame{
         settingtabel(tblbayar);
         tahunajaran();
         this.setLocationRelativeTo(null);
-        settable();       
+        settable();
     }
-    
-    public void settable(){
-        DefaultTableModel model=new DefaultTableModel();
-        model.addColumn("No pembayaran");
-        model.addColumn("Tgl Bayar");
-        model.addColumn("Nis");
-        model.addColumn("Nama");
-        model.addColumn("Jenis Kelamin");
-        model.addColumn("Kode kelas");
-        model.addColumn("Kelas");
-        model.addColumn("Bulan pembayaran");
-        model.addColumn("Jumlah Bayar");
-        model.addColumn("Tahun Bayar");
-        model.addColumn("Tahun Ajaran");
-        model.addColumn("Total Bayar");
-        tblbayar.setModel(model);        
-    }  
-    
-    public void tahunajaran(){
-        try{
-            Connection conn = new DBConnection().connect();
-            String sql = "select * from tahunajaran";
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);        
-            while(rs.next()){
-                String tahunajaran = rs.getString("tahun");
-                cbta.addItem(tahunajaran);
-            }
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }    
-    
-    public void settingtabel(JTable tabel){
-        tblbayar.setDefaultEditor(Object.class, null);
-        tblbayar.getTableHeader().setReorderingAllowed(false);
-        tblbayar.getTableHeader().setResizingAllowed(false);
-        tblbayar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        JTableHeader header=tblbayar.getTableHeader();
-        ((DefaultTableCellRenderer)header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
-    }    
-    
-    public void baru(){
-        lblnopembayaran.setText("...");
-        jdtglbayar.setCalendar(null);
-        jdtglbayar.setEnabled(false);
-        lblnis.setText("...");
-        lblnama.setText("...");
-        lblkelamin.setText("...");
-        lblkodekelas.setText("...");
-        lbkelas.setText("...");
-        lbltotal.setText(0+"");
-        btnbaru.setEnabled(false);
-        btnbayar.setEnabled(false);        
-        
-        DefaultTableModel model = (DefaultTableModel)this.tblbayar.getModel();
-        model.setRowCount(0);
-        JCheckBox[] cb = new JCheckBox[]{
-            cboxjanuari,cboxfebruari,cboxmaret,cboxapril,cboxmei,cboxjuni,cboxjuli,cboxagustus,cboxseptember,cboxoktober,cboxnovember,cboxdesember
-        };
-        for(JCheckBox cbox:cb){
-            cbox.setEnabled(false);
-            cbox.setSelected(false);           
-        }
-    }
-    
-    public void insertbayar(String nopembayaran,String tglbayar,String nis,String nama,String jk,String kodekls,String kelas,String bulan,double jmlbyr,String tahunbayar,String ta,double total){
-        try{
-            Connection conn = new DBConnection().connect();
-            String sql = "insert into bayar values('"+nopembayaran+"','"+tglbayar+"','"+nis+"','"+nama+"','"+jk+"','"+kodekls+"','"+kelas+"','"+bulan+"','"+jmlbyr+"','"+tahunbayar+"','"+ta+"','"+total+"')";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.execute();
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    public void checkbox(JCheckBox cb){
-        if(cb.isSelected() && cb.isEnabled()){
-            totalbayar += 100000;
-            lbltotal.setText(totalbayar+"");
-        }else{
-            totalbayar -= 100000;
-            lbltotal.setText(totalbayar+"");
-        }
-    }
-    
-    public void caribayar(String nis,String tahun){        
+
+    public void settable() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("No pembayaran");
         model.addColumn("Tgl Bayar");
@@ -145,20 +59,123 @@ public class pembayaran extends javax.swing.JFrame{
         model.addColumn("Jumlah Bayar");
         model.addColumn("Tahun Bayar");
         model.addColumn("Tahun Ajaran");
-        model.addColumn("Total Bayar");        
-        JCheckBox [] cb = new JCheckBox[]{
-            cboxjanuari,cboxfebruari,cboxmaret,cboxapril,cboxmei,cboxjuni,cboxjuli,cboxagustus,cboxseptember,cboxoktober,cboxnovember,cboxdesember
-        };        
-        lbltotal.setText(0+"");
+        model.addColumn("Total Bayar");
+        tblbayar.setModel(model);
+    }
+
+    public void tahunajaran() {
+        try {
+            Connection conn = new DBConnection().connect();
+            String sql = "select * from tahunajaran";
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                String tahunajaran = rs.getString("tahun");
+                cbta.addItem(tahunajaran);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void settingtabel(JTable tabel) {
+        tblbayar.setDefaultEditor(Object.class, null);
+        tblbayar.getTableHeader().setReorderingAllowed(false);
+        tblbayar.getTableHeader().setResizingAllowed(false);
+        tblbayar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        JTableHeader header = tblbayar.getTableHeader();
+        ((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    public void baru() {
+        lblnopembayaran.setText("...");
+        jdtglbayar.setCalendar(null);
+        jdtglbayar.setEnabled(false);
+        lblnis.setText("...");
+        lblnama.setText("...");
+        lblkelamin.setText("...");
+        lblkodekelas.setText("...");
+        lbkelas.setText("...");
+        lbltotal.setText(0 + "");
+        btnbaru.setEnabled(false);
+        btnbayar.setEnabled(false);
+
+        DefaultTableModel model = (DefaultTableModel) this.tblbayar.getModel();
+        model.setRowCount(0);
+        JCheckBox[] cb = new JCheckBox[]{
+            cboxjanuari, cboxfebruari, cboxmaret, cboxapril, cboxmei, cboxjuni, cboxjuli, cboxagustus, cboxseptember, cboxoktober, cboxnovember, cboxdesember
+        };
+        for (JCheckBox cbox : cb) {
+            cbox.setEnabled(false);
+            cbox.setSelected(false);
+        }
+    }
+
+    public void struk() {
+        java.sql.Connection conn = new DBConnection().connect();
+        try {
+            File file = new File("src/laporan/struk1.jrxml");
+            JasperDesign jasperdesign = JRXmlLoader.load(file);
+            String sql = "select * from bayar where Nopembayaran = '" + lblnopembayaran.getText() + "' and nis = '" + txtcari.getText() + "'";
+            JRDesignQuery newquery = new JRDesignQuery();
+            newquery.setText(sql);
+            jasperdesign.setQuery(newquery);
+            JasperReport jasperreport = JasperCompileManager.compileReport(jasperdesign);
+            JasperPrint jp = JasperFillManager.fillReport(jasperreport, null, conn);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void insertbayar(String nopembayaran, String tglbayar, String nis, String nama, String jk, String kodekls, String kelas, String bulan, double jmlbyr, String tahunbayar, String ta, double total) {
+        try {
+            Connection conn = new DBConnection().connect();
+            String sql = "insert into bayar values('" + nopembayaran + "','" + tglbayar + "','" + nis + "','" + nama + "','" + jk + "','" + kodekls + "','" + kelas + "','" + bulan + "','" + jmlbyr + "','" + tahunbayar + "','" + ta + "','" + total + "')";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void checkbox(JCheckBox cb) {
+        if (cb.isSelected() && cb.isEnabled()) {
+            totalbayar += 100000;
+            lbltotal.setText(totalbayar + "");
+        } else {
+            totalbayar -= 100000;
+            lbltotal.setText(totalbayar + "");
+        }
+    }
+
+    public void caribayar(String nis, String tahun) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No pembayaran");
+        model.addColumn("Tgl Bayar");
+        model.addColumn("Nis");
+        model.addColumn("Nama");
+        model.addColumn("Jenis Kelamin");
+        model.addColumn("Kode kelas");
+        model.addColumn("Kelas");
+        model.addColumn("Bulan pembayaran");
+        model.addColumn("Jumlah Bayar");
+        model.addColumn("Tahun Bayar");
+        model.addColumn("Tahun Ajaran");
+        model.addColumn("Total Bayar");
+        JCheckBox[] cb = new JCheckBox[]{
+            cboxjanuari, cboxfebruari, cboxmaret, cboxapril, cboxmei, cboxjuni, cboxjuli, cboxagustus, cboxseptember, cboxoktober, cboxnovember, cboxdesember
+        };
+        lbltotal.setText(0 + "");
         totalbayar = 0;
         Date tgl = new Date();
-        jdtglbayar.setDate(tgl);        
-        try{
+        jdtglbayar.setDate(tgl);
+        try {
             Connection conn = new DBConnection().connect();
-            String sqlsiswa = "select * from siswa where nis='"+nis+"'";
+            String sqlsiswa = "select * from siswa where nis='" + nis + "'";
             Statement st = conn.createStatement();
             ResultSet rsiswa = st.executeQuery(sqlsiswa);
-            if(rsiswa.next()){
+            if (rsiswa.next()) {
                 lblnopembayaran.setEnabled(true);
                 lblnis.setText(rsiswa.getString("Nis"));
                 lblnama.setText(rsiswa.getString("Nama"));
@@ -166,28 +183,28 @@ public class pembayaran extends javax.swing.JFrame{
                 lblkodekelas.setText(rsiswa.getString("Kodekelas"));
                 lbkelas.setText(rsiswa.getString("kelas"));
                 btnbaru.setEnabled(true);
-                btnbayar.setEnabled(true);            
-                for(JCheckBox cbox:cb){
-                    cbox.setEnabled(true);  
+                btnbayar.setEnabled(true);
+                for (JCheckBox cbox : cb) {
+                    cbox.setEnabled(true);
                     cbox.setSelected(false);
                 }
                 Connection connection = new DBConnection().connect();
-                String sqlbayar = "select * from bayar where nis='" + txtcari.getText() + "'And tahunajaran='" + tahun + "'";
+                String sqlbayar = "select * from bayar where nis = '" + txtcari.getText() + "' And tahunajaran = '" + tahun + "'";
                 Statement stm = connection.createStatement();
                 ResultSet rsbayar = stm.executeQuery(sqlbayar);
-                if(rsbayar == null){
-                    JOptionPane.showMessageDialog(null,"Tidak ada rekor pembayaran");
-                }else{
-                    while(rsbayar.next()){
+                if (rsbayar == null) {
+                    JOptionPane.showMessageDialog(null, "Tidak ada rekor pembayaran");
+                } else {
+                    while (rsbayar.next()) {
                         tblbayar.getTableHeader().setForeground(Color.white);
-                        tblbayar.getTableHeader().setBackground(new Color(34,49,63));
+                        tblbayar.getTableHeader().setBackground(new Color(34, 49, 63));
                         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                        model.addRow(new Object[]{rsbayar.getString(1),df.format(rsbayar.getDate(2)),rsbayar.getString(3),rsbayar.getString(4),
-                        rsbayar.getString(5),rsbayar.getString(6),rsbayar.getString(7),rsbayar.getString(8),
-                        "Rp."+NumberFormat.getInstance().format(rsbayar.getDouble(9)),
-                        rsbayar.getString(10),rsbayar.getString(11),"Rp."+NumberFormat.getInstance().format(rsbayar.getDouble(12))});                  
-                        for(JCheckBox cbox:cb){
-                            if(cbox.getText().equals(rsbayar.getString("BulanPembayaran"))){
+                        model.addRow(new Object[]{rsbayar.getString(1), df.format(rsbayar.getDate(2)), rsbayar.getString(3), rsbayar.getString(4),
+                            rsbayar.getString(5), rsbayar.getString(6), rsbayar.getString(7), rsbayar.getString(8),
+                            "Rp." + NumberFormat.getInstance().format(rsbayar.getDouble(9)),
+                            rsbayar.getString(10), rsbayar.getString(11), "Rp." + NumberFormat.getInstance().format(rsbayar.getDouble(12))});
+                        for (JCheckBox cbox : cb) {
+                            if (cbox.getText().equals(rsbayar.getString("BulanPembayaran"))) {
                                 cbox.setSelected(true);
                                 cbox.setEnabled(false);
                             }
@@ -199,17 +216,17 @@ public class pembayaran extends javax.swing.JFrame{
                         tblbayar.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
                         tblbayar.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
                     }
-                }
-            }else{
+                }                
+            } else {
                 JOptionPane.showMessageDialog(null, "Nis Tidak Ditemukan");
             }
             tblbayar.setModel(model);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,e);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -240,7 +257,6 @@ public class pembayaran extends javax.swing.JFrame{
         cboxoktober = new javax.swing.JCheckBox();
         cboxnovember = new javax.swing.JCheckBox();
         cboxdesember = new javax.swing.JCheckBox();
-        jButton5 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         btnbaru = new javax.swing.JButton();
         btnbayar = new javax.swing.JButton();
@@ -446,14 +462,6 @@ public class pembayaran extends javax.swing.JFrame{
         });
         jPanel2.add(cboxdesember, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, 30));
 
-        jButton5.setText("Struk");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
-
         lblkelas.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 280, 190));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -599,10 +607,10 @@ public class pembayaran extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
     private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
         caribayar(txtcari.getText(), String.valueOf(cbta.getSelectedItem()));
-        lblnopembayaran.setText("PM-"+String.valueOf(no));       
+        FunctionClass.autoGenerateNoPembayaran(lblnopembayaran);
     }//GEN-LAST:event_btncariActionPerformed
     private void cboxjanuariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxjanuariActionPerformed
-       checkbox(cboxjanuari);
+        checkbox(cboxjanuari);
     }//GEN-LAST:event_cboxjanuariActionPerformed
     private void cboxfebruariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxfebruariActionPerformed
         checkbox(cboxfebruari);
@@ -614,7 +622,7 @@ public class pembayaran extends javax.swing.JFrame{
         checkbox(cboxapril);
     }//GEN-LAST:event_cboxaprilActionPerformed
     private void cboxmeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxmeiActionPerformed
-        checkbox(cboxmei);         
+        checkbox(cboxmei);
     }//GEN-LAST:event_cboxmeiActionPerformed
     private void cboxjuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxjuniActionPerformed
         checkbox(cboxjuni);
@@ -638,25 +646,27 @@ public class pembayaran extends javax.swing.JFrame{
         checkbox(cboxdesember);
     }//GEN-LAST:event_cboxdesemberActionPerformed
     private void btnbayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbayarActionPerformed
-        try{
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             JCheckBox[] cb = new JCheckBox[]{
-                cboxjanuari,cboxfebruari,cboxmaret,cboxapril,cboxmei,cboxjuni,cboxjuli,cboxagustus,cboxseptember,cboxoktober,cboxnovember,cboxdesember
+                cboxjanuari, cboxfebruari, cboxmaret, cboxapril, cboxmei, cboxjuni, cboxjuli, cboxagustus, cboxseptember, cboxoktober, cboxnovember, cboxdesember
             };
-            for(JCheckBox cbox:cb){
+            for (JCheckBox cbox : cb) {
                 int tahun = Calendar.getInstance().get(Calendar.YEAR);
                 String tahunconv = String.valueOf(tahun);
-                if(cbox.isSelected() && cbox.isEnabled()){
-                    insertbayar(lblnopembayaran.getText(),sdf.format(jdtglbayar.getDate()),lblnis.getText(),lblnama.getText(),lblkelamin.getText(),lblkodekelas.getText(),lbkelas.getText(),cbox.getText(),100000,tahunconv,String.valueOf(cbta.getSelectedItem()),100000);  
+                if (cbox.isSelected() && cbox.isEnabled()) {
+                    insertbayar(lblnopembayaran.getText(), sdf.format(jdtglbayar.getDate()), lblnis.getText(), lblnama.getText(), lblkelamin.getText(), lblkodekelas.getText(), lbkelas.getText(), cbox.getText(), 100000, tahunconv, String.valueOf(cbta.getSelectedItem()), 100000);
                     cbox.setEnabled(false);
                 }
             }
             JOptionPane.showMessageDialog(null, "Sukses Membayar");
-            lbltotal.setText(0+"");
-            caribayar(txtcari.getText(),String.valueOf(cbta.getSelectedItem()));
-        }catch(HeadlessException e){
+            lbltotal.setText(0 + "");
+            caribayar(txtcari.getText(), String.valueOf(cbta.getSelectedItem()));
+            struk();
+            FunctionClass.autoGenerateNoPembayaran(lblnopembayaran);
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null, e);
-        }       
+        }
     }//GEN-LAST:event_btnbayarActionPerformed
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
         dispose();
@@ -666,7 +676,9 @@ public class pembayaran extends javax.swing.JFrame{
         baru();
     }//GEN-LAST:event_btnbaruActionPerformed
     private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
-        
+        FunctionClass.deleteDataPembayaran(nopm, bln, ta);
+        caribayar(txtcari.getText(), String.valueOf(cbta.getSelectedItem()));
+        FunctionClass.autoGenerateNoPembayaran(lblnopembayaran);
     }//GEN-LAST:event_btnhapusActionPerformed
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         dispose();
@@ -674,32 +686,31 @@ public class pembayaran extends javax.swing.JFrame{
     private void lblminimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblminimizeMouseClicked
         this.setState(pembayaran.ICONIFIED);
     }//GEN-LAST:event_lblminimizeMouseClicked
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        java.sql.Connection conn = new DBConnection().connect();
-            try{                
-                File file = new File("src/laporan/struk1.jrxml");
-                JasperDesign jasperdesign = JRXmlLoader.load(file);
-                String sql = "select * from bayar where Nopembayaran = '" + lblnopembayaran.getText() + "' and nis = '" + txtcari.getText() + "'";
-                JRDesignQuery newquery = new JRDesignQuery();
-                newquery.setText(sql);
-                jasperdesign.setQuery(newquery);
-                JasperReport jasperreport = JasperCompileManager.compileReport(jasperdesign);
-                JasperPrint jp = JasperFillManager.fillReport(jasperreport, null, conn);
-                JasperViewer.viewReport(jp,false);
-            }catch(JRException e){
-                JOptionPane.showMessageDialog(null, e);
-            }
-    }//GEN-LAST:event_jButton5ActionPerformed
     private void cbtaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbtaItemStateChanged
-        if("".equals(txtcari.getText())){
-            
-        }else{
-            caribayar(txtcari.getText(),String.valueOf(cbta.getSelectedItem()));
+        if ("".equals(txtcari.getText())) {
+
+        } else {
+            caribayar(txtcari.getText(), String.valueOf(cbta.getSelectedItem()));
+            FunctionClass.autoGenerateNoPembayaran(lblnopembayaran);            
         }
     }//GEN-LAST:event_cbtaItemStateChanged
     private void tblbayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblbayarMouseClicked
         int baris = tblbayar.getSelectedRow();
-        
+//        model.addColumn("No pembayaran");
+//        model.addColumn("Tgl Bayar");
+//        model.addColumn("Nis");
+//        model.addColumn("Nama");
+//        model.addColumn("Jenis Kelamin");
+//        model.addColumn("Kode kelas");
+//        model.addColumn("Kelas");
+//        model.addColumn("Bulan pembayaran");
+//        model.addColumn("Jumlah Bayar");
+//        model.addColumn("Tahun Bayar");
+//        model.addColumn("Tahun Ajaran");
+//        model.addColumn("Total Bayar");
+        nopm = tblbayar.getValueAt(baris, 0).toString();
+        bln = tblbayar.getValueAt(baris, 7).toString();
+        ta = tblbayar.getValueAt(baris, 10).toString();
     }//GEN-LAST:event_tblbayarMouseClicked
     /**
      * @param args the command line arguments
@@ -756,7 +767,6 @@ public class pembayaran extends javax.swing.JFrame{
     private javax.swing.JCheckBox cboxoktober;
     private javax.swing.JCheckBox cboxseptember;
     private javax.swing.JComboBox<String> cbta;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

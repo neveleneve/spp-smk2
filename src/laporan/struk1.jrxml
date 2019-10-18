@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -48,7 +48,7 @@
 	<title>
 		<band height="101" splitType="Stretch">
 			<staticText>
-				<reportElement x="196" y="4" width="332" height="58" />
+				<reportElement x="196" y="4" width="332" height="58"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Serif" size="13" isBold="false"/>
 				</textElement>
@@ -56,66 +56,92 @@
 TANJUNGPINANG]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="95" width="555" height="1" />
+				<reportElement x="0" y="95" width="555" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="196" y="62" width="332" height="28" />
+				<reportElement x="196" y="62" width="332" height="28"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Serif" size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Jl. Pramuka No.1, Kecamatan Bukit Bestari, Tanjungpinang
 Telp / Fax : 0771 – 22653]]></text>
 			</staticText>
+			<image>
+				<reportElement positionType="Float" x="62" y="0" width="102" height="90"/>
+				<imageExpression><![CDATA["C:\\Users\\pandu\\Documents\\NetBeansProjects\\soyuz\\spp\\src\\laporan\\logo smk2.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="25" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="0" y="25" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Nama		:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="25" width="212" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="100" y="25" width="212" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Nama}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="45" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="0" y="45" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<text><![CDATA[NIS		:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="45" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="100" y="45" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{NIS}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="5" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="355" y="5" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Kelas		:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="455" y="5" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="455" y="5" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Kelas}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="25" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="355" y="25" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tanggal		:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="455" y="25" width="100" height="20" />
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="455" y="25" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{tglbayar}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="5" width="100" height="20" />
+				<reportElement x="0" y="5" width="100" height="20"/>
+				<textElement>
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<text><![CDATA[No. Struk	:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="5" width="212" height="20" />
+				<reportElement x="100" y="5" width="212" height="20"/>
+				<textElement>
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Nopembayaran}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -123,18 +149,24 @@ Telp / Fax : 0771 – 22653]]></text>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="428" y="0" width="125" height="20" backcolor="#6666FF" />
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement mode="Opaque" x="428" y="0" width="125" height="20" backcolor="#6666FF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Jumlah]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="190" height="20" backcolor="#6666FF" />
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement mode="Opaque" x="0" y="0" width="190" height="20" backcolor="#6666FF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Bulan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="189" y="0" width="240" height="20" backcolor="#6666FF" />
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement mode="Opaque" x="189" y="0" width="240" height="20" backcolor="#6666FF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tahun Ajaran]]></text>
 			</staticText>
 		</band>
@@ -142,17 +174,17 @@ Telp / Fax : 0771 – 22653]]></text>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="428" y="0" width="125" height="21" />
+				<reportElement x="428" y="0" width="125" height="21"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{JumlahBayar}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp. "+DecimalFormat.getInstance().format($F{JumlahBayar}).replace(",",".")+",00"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="190" height="21" />
+				<reportElement x="0" y="0" width="190" height="21"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -162,7 +194,7 @@ Telp / Fax : 0771 – 22653]]></text>
 				<textFieldExpression><![CDATA[$F{BulanPembayaran}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="188" y="0" width="240" height="21" />
+				<reportElement x="188" y="0" width="240" height="21"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -173,20 +205,22 @@ Telp / Fax : 0771 – 22653]]></text>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="10" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="10" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="81" splitType="Stretch">
+		<band height="99" splitType="Stretch">
 			<staticText>
-				<reportElement x="381" y="6" width="126" height="20" />
-				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<reportElement x="381" y="19" width="126" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Serif"/>
+				</textElement>
 				<text><![CDATA[Mengetahui,]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="381" y="60" width="126" height="20" />
+				<reportElement x="381" y="68" width="126" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<text><![CDATA[.......................................]]></text>
 			</staticText>

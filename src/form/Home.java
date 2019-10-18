@@ -259,7 +259,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_lblminimizeMouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        new laporan().setVisible(true);
+        new form_laporan().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 

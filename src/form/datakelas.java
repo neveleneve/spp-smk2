@@ -326,7 +326,7 @@ public class datakelas extends javax.swing.JFrame {
             pst.execute();
             JOptionPane.showMessageDialog(null,"Sukses menghapus kelas");
             isitabel();
-        }catch(Exception e){
+        }catch(SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }        
     }//GEN-LAST:event_btnhapusActionPerformed
